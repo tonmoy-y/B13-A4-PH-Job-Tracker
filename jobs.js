@@ -3,12 +3,24 @@ console.log("Job Tracker Connected");
 let totalJobsElement = document.getElementById('job-container');
 let totalJobsArray = Array.from(totalJobsElement.children);
 
+let interviewCounter = 0;
+let rejectedCounter = 0;
+
 console.log(totalJobsArray);
 
 let totalJobStatus = [];
 
 let rejectedContainer = document.getElementById('rejected-container');
 let interviewContainer = document.getElementById('interview-container');
+
+const jobNumbers = document.getElementsByClassName('total-job-number');
+const interviewNumbers = document.getElementsByClassName('total-interview-number');
+const rejectedNumbers = document.getElementsByClassName('total-rejected-number');
+const btnAll = document.getElementById('btn-all');
+const btnInterview = document.getElementById('btn-interview');
+const btnRejected = document.getElementById('btn-rejected');
+
+
 
 for(let i=0; i< totalJobsArray.length; i++) {
     totalJobStatus.push({
@@ -18,20 +30,33 @@ for(let i=0; i< totalJobsArray.length; i++) {
     })
 }
 
-console.log(totalJobStatus)
+console.log(totalJobStatus);
 
 
-document.getElementById('btn-all').addEventListener('click', function (){
+
+if(btnAll.checked){
+            document.getElementsByClassName('total-job-number')[1].innerText = totalJobStatus.length;
+                }
+        else if(btnInterview.checked){
+                   document.getElementsByClassName('total-interview-number')[1].innerText = interviewCounter +' of ';
+                }
+        else if(btnRejected.checked){
+            document.getElementsByClassName('total-rejected-number')[1].innerText = rejectedCounter+' of ';
+                }
+
+
+btnAll.addEventListener('click', function (){
     totalJobsElement.classList.remove('hidden');
     totalJobsElement.innerHTML= '';
         for(let i=0; i <totalJobStatus.length; i++) {
             totalJobsElement.appendChild(totalJobStatus[i].job);
         }
         showNoJobs(totalJobStatus.length);
+        updateText();
 }
 );
 
-document.getElementById('btn-interview').addEventListener('click', function() {
+btnInterview.addEventListener('click', function() {
     totalJobsElement.classList.add('hidden');
     interviewContainer.classList.remove('hidden');
     rejectedContainer.classList.add('hidden');
@@ -45,10 +70,11 @@ document.getElementById('btn-interview').addEventListener('click', function() {
 
     }
     showNoJobs(cnt);
+    updateText();
 });
 
 
-document.getElementById('btn-rejected').addEventListener('click', function() {
+btnRejected.addEventListener('click', function() {
     totalJobsElement.classList.add('hidden');
     rejectedContainer.classList.remove('hidden');
     interviewContainer.classList.add('hidden');
@@ -61,6 +87,7 @@ document.getElementById('btn-rejected').addEventListener('click', function() {
 
     }
     showNoJobs(cnt);
+    updateText();
 });
 
 
@@ -71,14 +98,44 @@ function deleteJob(id) {
     for(let i=0; i< totalJobStatus.length; i++) {
         if(totalJobStatus[i].job.id === id) {
             document.getElementById(id).remove();
+            if(totalJobStatus[i].isInterview) {
+                interviewCounter--;
+                
+            }
+                if(totalJobStatus[i].isRejected) {
+                    rejectedCounter--;
+                }
             totalJobStatus.splice(i, 1);
             break;
         }
 
     }
 
-        showNoJobs(totalJobStatus.length);
+        if(btnAll.checked){
+             showNoJobs(totalJobStatus.length);
+                }
+        else if(btnInterview.checked){
+            showNoJobs(interviewCounter);
+                }
+        else if(btnRejected.checked){
+            showNoJobs(rejectedCounter);
+                }
+        document.getElementsByClassName('total-job-number')[0].innerText = totalJobStatus.length;
+        document.getElementsByClassName('total-job-number')[1].innerText = totalJobStatus.length;
+        
+        document.getElementsByClassName('total-interview-number')[0].innerText = interviewCounter;
+        document.getElementsByClassName('total-rejected-number')[0].innerText = rejectedCounter;
 
+        if(btnAll.checked){
+            document.getElementsByClassName('total-job-number')[1].innerText = totalJobStatus.length;
+                }
+        else if(btnInterview.checked){
+                   document.getElementsByClassName('total-interview-number')[1].innerText = interviewCounter +' of ';
+                }
+        else if(btnRejected.checked){
+            document.getElementsByClassName('total-rejected-number')[1].innerText = rejectedCounter+' of ';
+                }
+updateText();
     
 }
 
@@ -87,24 +144,46 @@ function addToInterview(id) {
     for(let i=0; i< totalJobStatus.length; i++) {
        
         if(totalJobStatus[i].job.id === id) {
+            interviewCounter++;
         totalJobStatus[i].isInterview = true;
         // document.getElementById('interview-container').appendChild(totalJobStatus[i].job);
         if(totalJobStatus[i].isRejected) {
+            rejectedCounter--;
             document.getElementById('rejected-container').removeChild(totalJobStatus[i].job);
         }
             totalJobStatus[i].isRejected = false;
+
+
+        document.getElementsByClassName('total-interview-number')[0].innerText = interviewCounter;
+        document.getElementsByClassName('total-rejected-number')[0].innerText = rejectedCounter;
+
+
+        if(btnAll.checked){
+            document.getElementsByClassName('total-job-number')[1].innerText = totalJobStatus.length;
+                }
+        else if(btnInterview.checked){
+                   document.getElementsByClassName('total-interview-number')[1].innerText = interviewCounter +' of ';
+                }
+        else if(btnRejected.checked){
+            document.getElementsByClassName('total-rejected-number')[1].innerText = rejectedCounter+' of ';
+                }
 
         const status = totalJobStatus[i].job.querySelector('h5');
         status.className = "text-sm font-medium";
         status.innerHTML = `
         <button class="btn btn-sm btn-outline btn-secondary" disabled>INTERVIEW</button>
         `
+        break;
     }
 }
-
+       
+            showNoJobs(rejectedCounter);
+             
+updateText();
 }
 
 function addToRejected(id) {
+    rejectedCounter++;
 
  for(let i=0; i< totalJobStatus.length; i++) {
     
@@ -112,19 +191,37 @@ function addToRejected(id) {
         if(totalJobStatus[i].job.id === id) {
             totalJobStatus[i].isRejected = true;
             if(totalJobStatus[i].isInterview) {
+                interviewCounter--;
             document.getElementById('interview-container').removeChild(totalJobStatus[i].job);
         }
-            
+             showNoJobs(interviewCounter);
+
+        document.getElementsByClassName('total-interview-number')[0].innerText = interviewCounter;
+        document.getElementsByClassName('total-rejected-number')[0].innerText = rejectedCounter;
+        
+        
+        if(btnAll.checked){
+            document.getElementsByClassName('total-job-number')[1].innerText = totalJobStatus.length;
+                }
+        else if(btnInterview.checked){
+                   document.getElementsByClassName('total-interview-number')[1].innerText = interviewCounter +' of ';
+                }
+        else if(btnRejected.checked){
+            document.getElementsByClassName('total-rejected-number')[1].innerText = rejectedCounter+' of ';
+                }
+
+
+
             totalJobStatus[i].isInterview = false;
             const status = totalJobStatus[i].job.querySelector('h5');
         status.className = "text-sm font-medium";
         status.innerHTML = `
         <button class="btn btn-sm btn-outline btn-secondary" disabled>REJECTED</button>
         `
-
+break;
         }
     }
-
+updateText();
 
 }
 
@@ -136,15 +233,31 @@ function showNoJobs(num) {
     }
 }
 
-function showNoJobByAppend() {
-    const noJobElement = document.getElementById('no-job');
-    noJobElement.innerHTML = `
-    <div class="no-job-container bg-base-100 flex justify-center items-center py-28 rounded-lg ">
-                <div class="no-jobs text-center flex flex-col justify-center items-center">
-                    <img src="./jobs.png" alt="No Job Picture">
-                    <h3 class="text-[#002C5C] font-semibold text-2xl">No jobs available</h3>
-                    <p class="text-gray-500">Check back soon for new job opportunities</p>
-                </div>
-</div>
-    `
+
+
+
+function updateText(){
+
+    if(btnAll.checked){
+        jobNumbers[1].innerText = totalJobStatus.length + " jobs";
+        interviewNumbers[1].innerText = "";
+        rejectedNumbers[1].innerText = "";
+    }
+
+    else if(btnInterview.checked){
+        interviewNumbers[1].innerText =
+        interviewCounter + " of " + totalJobStatus.length + " jobs";
+
+        jobNumbers[1].innerText = "";
+        rejectedNumbers[1].innerText = "";
+    }
+
+    else if(btnRejected.checked){
+        rejectedNumbers[1].innerText =
+        rejectedCounter + " of " + totalJobStatus.length + " jobs";
+
+        jobNumbers[1].innerText = "";
+        interviewNumbers[1].innerText = "";
+    }
+
 }
