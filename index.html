@@ -39,7 +39,7 @@
         <div class="card-container grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="card p-5 text-[#323B49] bg-base-100 rounded-lg">
                 <p class="text-sm">Total</p>
-                <h2 class="font-bold text-2xl">8</h2>
+                <h2 class="font-bold text-2xl"> <span class ='total-job'>8</span> </h2>
             </div>
             <div class="card p-5 text-[#323B49] bg-base-100 rounded-lg">
                 <p class="text-sm ">Interview</p>
@@ -59,13 +59,13 @@
             <div class="flex justify-between">
 
                 <h3 class="text-xl font-semibold ">Available Jobs</h3>
-                <p class="text-gray-500 font-medium">8 jobs</p>
+                <p class="text-gray-500 font-medium"><span class ='total-job'>8</span> jobs</p>
             </div>
             <div class="my-5 text-sm font-semibold space-x-2 join ">
  
-            <input class="join-item btn" type="radio" name="options" aria-label="All" checked />
-            <input class="join-item btn" type="radio" name="options" aria-label="Interview" />
-            <input class="join-item btn" type="radio" name="options" aria-label="Rejected" />
+            <input id="btn-all" class="join-item btn" type="radio" name="options" aria-label="All" checked />
+            <input id="btn-interview" class="join-item btn" type="radio" name="options" aria-label="Interview" />
+            <input id="btn-rejected" class="join-item btn" type="radio" name="options" aria-label="Rejected" />
 
             </div>
         </div>
@@ -79,7 +79,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">Mobile First Corp</h3>
                         <p class="text-gray-500">React Native Developer</p>
                     </div>
-                    <button onclick="" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-1')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>Remote</span> • <span>Full-time</span> • <span>$130,000 - $175,000</span></p>
                 <h5 class="text-sm font-medium p-2.5 bg-[#EEF4FF] text-[#002C5C] max-w-28 mb-2">NOT APPLIED</h5>
@@ -97,7 +97,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">WebFlow Agency</h3>
                         <p class="text-gray-500">Web Designer & Developer</p>
                     </div>
-                    <button class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-2')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>Los Angeles, CA</span> • <span>Part-time</span> • <span>$130,000 - $175,000</span></p>
                 <h5 class="text-sm font-medium p-2.5 bg-[#EEF4FF] text-[#002C5C] max-w-28 mb-2">NOT APPLIED</h5>
@@ -115,7 +115,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">DataViz Solutions</h3>
                         <p class="text-gray-500">Data Visualization Specialist</p>
                     </div>
-                    <button class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-3')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>Boston, MA </span> • <span>Full-time</span> • <span>$125,000 - $165,000</span></p>
                 <h5 class="text-sm font-medium p-2.5 bg-[#EEF4FF] text-[#002C5C] max-w-28 mb-2">NOT APPLIED</h5>
@@ -133,7 +133,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">CloudFirst Inc</h3>
                         <p class="text-gray-500">Backend Developer</p>
                     </div>
-                    <button class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-4')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>Boston, MA</span> • <span>Full-time</span> • <span>$140,000 - $190,000</span></p>
                 <h5 class="text-sm font-medium p-2.5 bg-[#EEF4FF] text-[#002C5C] max-w-28 mb-2">NOT APPLIED</h5>
@@ -151,7 +151,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">Innovation Labs</h3>
                         <p class="text-gray-500">UI/UX Engineer</p>
                     </div>
-                    <button class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-5')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>Austin, TX</span> • <span>Full-time</span> • <span>$110,000 - $150,000</span></p>
                 <h5 class="text-sm font-medium p-2.5 bg-[#EEF4FF] text-[#002C5C] max-w-28 mb-2">NOT APPLIED</h5>
@@ -169,7 +169,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">MegaCorp Solutions</h3>
                         <p class="text-gray-500">JavaScript Developer</p>
                     </div>
-                    <button class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-6')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>New York, NY</span> • <span>Full-time</span> • <span>$130,000 - $170,000</span></p>
 
@@ -188,7 +188,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">StartupXYZ</h3>
                         <p class="text-gray-500">Full Stack Engineer</p>
                     </div>
-                    <button class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-7')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>Remote</span> • <span>Full-time</span> • <span>$120,000 - $180,000</span></p>
                 <h5 class="text-sm font-medium p-2.5 bg-[#EEF4FF] text-[#002C5C] max-w-28 mb-2">NOT APPLIED</h5>
@@ -206,7 +206,7 @@
                         <h3 class="text-lg font-semibold text-[#002C5C]">TechCorp Industries</h3>
                         <p class="text-gray-500">Senior Frontend Developer</p>
                     </div>
-                    <button class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
+                    <button onclick="deleteJob('job-id-8')" class="btn btn-circle"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
                 <p class="text-gray-500 my-5 text-sm  flex gap-2.5"><span>San Francisco, CA</span> • <span>Full-time</span> • <span>$130,000 - $175,000</span></p>
                 <h5 class="text-sm font-medium p-2.5 bg-[#EEF4FF] text-[#002C5C] max-w-28 mb-2">NOT APPLIED</h5>
@@ -222,7 +222,7 @@
 
 
 
-            <div class="no-job-container bg-base-100 flex justify-center items-center py-28 rounded-lg hidden">
+            <div id="no-job" class="no-job-container bg-base-100 flex justify-center items-center py-28 rounded-lg hidden">
                 <div class="no-jobs text-center flex flex-col justify-center items-center">
                     <img src="./jobs.png" alt="No Job Picture">
                     <h3 class="text-[#002C5C] font-semibold text-2xl">No jobs available</h3>
@@ -238,8 +238,8 @@
 
 
     <script src="./jobs.js">
-
         
+
     </script>
 
 </body>
