@@ -34,15 +34,7 @@ console.log(totalJobStatus);
 
 
 
-if(btnAll.checked){
-            document.getElementsByClassName('total-job-number')[1].innerText = totalJobStatus.length;
-                }
-        else if(btnInterview.checked){
-                   document.getElementsByClassName('total-interview-number')[1].innerText = interviewCounter +' of ';
-                }
-        else if(btnRejected.checked){
-            document.getElementsByClassName('total-rejected-number')[1].innerText = rejectedCounter+' of ';
-                }
+
 
 
 btnAll.addEventListener('click', function (){
@@ -144,12 +136,15 @@ function addToInterview(id) {
     for(let i=0; i< totalJobStatus.length; i++) {
        
         if(totalJobStatus[i].job.id === id) {
+            if(totalJobStatus[i].isInterview){
+                return;
+            }
             interviewCounter++;
         totalJobStatus[i].isInterview = true;
         // document.getElementById('interview-container').appendChild(totalJobStatus[i].job);
         if(totalJobStatus[i].isRejected) {
             rejectedCounter--;
-            document.getElementById('rejected-container').removeChild(totalJobStatus[i].job);
+            // document.getElementById('rejected-container').removeChild(totalJobStatus[i].job);
         }
             totalJobStatus[i].isRejected = false;
 
@@ -183,16 +178,20 @@ updateText();
 }
 
 function addToRejected(id) {
-    rejectedCounter++;
-
- for(let i=0; i< totalJobStatus.length; i++) {
     
-
+    for(let i=0; i< totalJobStatus.length; i++) {
+        
+        
         if(totalJobStatus[i].job.id === id) {
+
+            if(totalJobStatus[i].isRejected){
+                return;
+            }
+            rejectedCounter++;
             totalJobStatus[i].isRejected = true;
             if(totalJobStatus[i].isInterview) {
                 interviewCounter--;
-            document.getElementById('interview-container').removeChild(totalJobStatus[i].job);
+            // document.getElementById('interview-container').removeChild(totalJobStatus[i].job);
         }
              showNoJobs(interviewCounter);
 
