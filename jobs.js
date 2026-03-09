@@ -144,21 +144,24 @@ function addToInterview(id) {
         // document.getElementById('interview-container').appendChild(totalJobStatus[i].job);
         if(totalJobStatus[i].isRejected) {
             rejectedCounter--;
+            if(btnRejected.checked) {
+            document.getElementById(id).remove();
+            }
             // document.getElementById('rejected-container').removeChild(totalJobStatus[i].job);
         }
-            totalJobStatus[i].isRejected = false;
-
-
+        totalJobStatus[i].isRejected = false;
+        
+        
         document.getElementsByClassName('total-interview-number')[0].innerText = interviewCounter;
         document.getElementsByClassName('total-rejected-number')[0].innerText = rejectedCounter;
-
-
+        
+        
         if(btnAll.checked){
             document.getElementsByClassName('total-job-number')[1].innerText = totalJobStatus.length;
-                }
+        }
         else if(btnInterview.checked){
-                   document.getElementsByClassName('total-interview-number')[1].innerText = interviewCounter +' of ';
-                }
+            document.getElementsByClassName('total-interview-number')[1].innerText = interviewCounter +' of ';
+        }
         else if(btnRejected.checked){
             document.getElementsByClassName('total-rejected-number')[1].innerText = rejectedCounter+' of ';
                 }
@@ -166,14 +169,14 @@ function addToInterview(id) {
         const status = totalJobStatus[i].job.querySelector('h5');
         status.className = "text-sm font-medium";
         status.innerHTML = `
-        <button class="btn btn-sm btn-outline btn-secondary" disabled>INTERVIEW</button>
+        <button class="btn btn-sm btn-outline pointer-events-none">INTERVIEW</button>
         `
         break;
     }
 }
-       
-            showNoJobs(rejectedCounter);
-             
+
+showNoJobs(rejectedCounter);
+
 updateText();
 }
 
@@ -191,6 +194,9 @@ function addToRejected(id) {
             totalJobStatus[i].isRejected = true;
             if(totalJobStatus[i].isInterview) {
                 interviewCounter--;
+                if(btnInterview.checked) {
+                    document.getElementById(id).remove();
+                }
             // document.getElementById('interview-container').removeChild(totalJobStatus[i].job);
         }
              showNoJobs(interviewCounter);
@@ -215,7 +221,7 @@ function addToRejected(id) {
             const status = totalJobStatus[i].job.querySelector('h5');
         status.className = "text-sm font-medium";
         status.innerHTML = `
-        <button class="btn btn-sm btn-outline btn-secondary" disabled>REJECTED</button>
+        <button class="btn btn-sm btn-outline pointer-events-none">REJECTED</button>
         `
 break;
         }
