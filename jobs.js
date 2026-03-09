@@ -174,9 +174,9 @@ function addToInterview(id) {
         break;
     }
 }
-
+if(btnRejected.checked){
 showNoJobs(rejectedCounter);
-
+}
 updateText();
 }
 
@@ -199,8 +199,9 @@ function addToRejected(id) {
                 }
             // document.getElementById('interview-container').removeChild(totalJobStatus[i].job);
         }
+        if(btnInterview.checked) {
              showNoJobs(interviewCounter);
-
+        }
         document.getElementsByClassName('total-interview-number')[0].innerText = interviewCounter;
         document.getElementsByClassName('total-rejected-number')[0].innerText = rejectedCounter;
         
